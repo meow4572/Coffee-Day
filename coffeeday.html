@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"> <!-- Character encoding -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design -->
+  <title>Coffee Day. - Where Asian Chai meets European Coffee culture in perfect harmony</title> <!-- Page title -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script> <!-- Icon library -->
+    <style>
+  :root { /* CSS variables for color, font, spacing, etc. */
+          --color-primary: #3E2723;      /* Elegant deep brown */
+          --color-secondary: #BCAAA4;    /* Soft taupe */
+          --color-accent: #6D4C41;       /* Rich brown */
+          --color-light: #F5F5F5;        /* Light gray */
+          --color-cream: #FDF6F0;        /* Creamy white */
+          --color-dark: #212121;         /* Charcoal */
+          --color-white: #FFFFFF;
+          --color-black: #181818;
+          --color-gray-light: #ECECEC;
+          --color-gray: #888888;
+          --color-success: #7CB342;      /* Olive green */
+          --color-error: #D84315;        /* Elegant red */
+          --font-primary: 'Playfair Display', serif;
+          --font-secondary: 'Lato', sans-serif;
+          --font-size-base: 16px;
+          --font-size-lg: 18px;
+          --font-size-xl: 24px;
+          --font-size-2xl: 32px;
+          --font-size-3xl: 48px;
+
+          --spacing-xs: 0.5rem;
+          --spacing-sm: 1rem;
+          --spacing-md: 1.5rem;
+          --spacing-lg: 2rem;
+          --spacing-xl: 3rem;
+          --spacing-2xl: 4rem;
+
+          --radius-sm: 4px;
+          --radius-md: 8px;
+          --radius-lg: 12px;
+
+          --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+          --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+          --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+          --transition-fast: 0.2s ease;
+          --transition-normal: 0.3s ease;
+          --transition-slow: 0.5s ease;
+        }
+
+  * { /* Reset default browser styles */
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+  html { /* Enable smooth scrolling and base font size */
+          scroll-behavior: smooth;
+          font-size: var(--font-size-base);
+        }
+
+  body { /* Set base font, color, and background */
+          font-family: var(--font-secondary);
+          line-height: 1.6;
+          color: var(--color-black);
+          background-color: var(--color-cream);
+        }
+
+  img { /* Make images responsive */
+          max-width: 100%;
+          height: auto;
+          display: block;
+        }
+
+  a { /* Remove underline from links and add transition */
+          text-decoration: none;
+          color: inherit;
+          transition: var(--transition-fast);
+        }
+
+  button { /* Style all buttons */
+          border: none;
+          background: none;
+          cursor: pointer;
+          font-family: inherit;
+        }
+
+  .container { /* Center content and set max width */
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 var(--spacing-sm);
+        }
+
+  .section { /* Section vertical spacing */
+          padding: var(--spacing-lg) 0;
+        }
+
+  .section__header { /* Center section headers */
+          text-align: center;
+          margin-bottom: var(--spacing-lg);
+        }
+
+  .section__title { /* Style for section titles */
+          font-family: var(--font-primary);
+          font-size: var(--font-size-2xl);
+          color: var(--color-primary);
+          margin-bottom: var(--spacing-xs);
+        }
+
+  .section__subtitle { /* Style for section subtitles */
+          font-size: var(--font-size-lg);
+          color: var(--color-gray);
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+  .header { /* Fixed top navigation bar */
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: rgba(253, 246, 240, 0.97);
+          box-shadow: 0 4px 24px 0 rgba(62, 39, 35, 0.10);
+          z-index: 1000;
+          transition: var(--transition-normal);
+        }
+
+  .nav { /* Navigation bar flex layout */
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: var(--spacing-sm) 0;
+        }
+
+  .nav__logo { /* Logo style */
+          font-family: var(--font-primary);
+          font-size: var(--font-size-xl);
+          color: var(--color-primary);
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          text-shadow: 0 2px 8px rgba(62, 39, 35, 0.08);
+          font-weight: bold;
+        }
+
+        .nav__menu {
+          display: flex;
+          list-style: none;
+          gap: var(--spacing-lg);
+        }
+
+        .nav__link {
+          color: var(--color-dark);
+          font-weight: 500;
+          transition: var(--transition-fast);
+        }
+
+        .nav__link:hover {
+          color: var(--color-primary);
+        }
+
+        .nav__toggle {
+          display: none;
+          color: var(--color-primary);
+          font-size: var(--font-size-xl);
+        }
+
+        .hero {
+          height: 100vh;
+          background: linear-gradient(rgba(139, 69, 19, 0.7), rgba(160, 82, 45, 0.7)),
+            url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+          background-size: cover;
+          background-position: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: var(--color-white);
+        }
+
+        .hero__content {
+          max-width: 800px;
+        }
+
+  .hero__title { /* Main hero title */
+          font-family: var(--font-primary);
+          font-size: var(--font-size-3xl);
+          margin-bottom: var(--spacing-md);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+  .hero__subtitle { /* Hero subtitle */
+          font-size: var(--font-size-lg);
+          margin-bottom: var(--spacing-xl);
+          opacity: 0.9;
+        }
+
+  .hero__actions { /* Hero action buttons */
+          display: flex;
+          gap: var(--spacing-md);
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+  .btn { /* Base button style */
+          display: inline-block;
+          padding: var(--spacing-sm) var(--spacing-lg);
+          border-radius: var(--radius-md);
+          font-weight: 600;
+          text-align: center;
+          transition: var(--transition-fast);
+          cursor: pointer;
+          border: 2px solid transparent;
+        }
+
+  .btn--primary { /* Primary button style */
+          background: var(--color-primary);
+          color: var(--color-white);
+        }
+
+        .btn--primary:hover {
+          background: var(--color-dark);
+          transform: translateY(-2px);
+        }
+
+  .btn--outline { /* Outline button style */
+          background: transparent;
+          color: var(--color-white);
+          border-color: var(--color-white);
+        }
+
+        .btn--outline:hover {
+          background: var(--color-white);
+          color: var(--color-primary);
+        }
+
+  .about__content { /* About section layout */
+          display: block;
+          width: 100%;
+        }
+
+        .about__text h3 {
+          color: var(--color-primary);
+          margin: var(--spacing-sm) 0 var(--spacing-xs);
+          font-family: var(--font-primary);
+        }
+
+        .about__text p {
+          margin-bottom: var(--spacing-xs);
+          color: var(--color-gray);
+        }
+
+        .values__list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--spacing-xs);
+        }
+
+        .value {
+          background: var(--color-light);
+          color: var(--color-dark);
+          padding: var(--spacing-xs) var(--spacing-sm);
+          border-radius: var(--radius-sm);
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .about__image {
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          box-shadow: var(--shadow-lg);
+        }
+
+        .menu {
+          background: var(--color-white);
+        }
+
+        .menu__tabs {
+          display: flex;
+          justify-content: center;
+          gap: var(--spacing-xs);
+          margin-bottom: var(--spacing-lg);
+          flex-wrap: wrap;
+        }
+
+        .menu__tab {
+          padding: var(--spacing-sm) var(--spacing-lg);
+          background: transparent;
+          color: var(--color-primary);
+          border: 2px solid var(--color-accent);
+          border-radius: 24px;
+          font-weight: 500;
+          font-family: var(--font-primary);
+          font-size: 1.1rem;
+          letter-spacing: 1px;
+          transition: var(--transition-fast);
+        }
+
+        .menu__tab.active,
+        .menu__tab:hover {
+          background: var(--color-accent);
+          color: var(--color-white);
+          border-color: var(--color-accent);
+          box-shadow: 0 2px 12px 0 rgba(62, 39, 35, 0.10);
+        }
+
+        .menu__content {
+          display: none;
+        }
+
+        .menu__content.active {
+          display: block;
+        }
+
+        .menu__grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: var(--spacing-xs);
+        }
+
+        .menu__item {
+          background: var(--color-gray-light);
+          padding: var(--spacing-sm);
+          border-radius: var(--radius-md);
+          transition: var(--transition-fast);
+        }
+
+        .menu__item:hover {
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-md);
+        }
+
+        .menu__item-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .menu__item h3 {
+          font-family: var(--font-primary);
+          color: var(--color-primary);
+        }
+
+        .price {
+          font-weight: bold;
+          color: var(--color-accent);
+          font-size: var(--font-size-lg);
+        }
+
+        @media (max-width: 768px) {
+          .nav__menu {
+            position: fixed;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--color-cream);
+            flex-direction: column;
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-normal);
+          }
+
+          .nav__menu--active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+          }
+
+          .nav__toggle {
+            display: block;
+          }
+
+          .hero__title {
+            font-size: var(--font-size-2xl);
+          }
+
+          .about__content {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-sm);
+          }
+        }
+
+    /* Contact Us Section Styles */
+    .contact-info {
+      background: linear-gradient(120deg, var(--color-cream) 60%, var(--color-light) 100%);
+      padding: 3rem 0 2rem 0;
+      margin-top: 2rem;
+      border-top: 1px solid var(--color-gray-light);
+    }
+    .contact-card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 24px 0 rgba(62,39,35,0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
+      text-align: center;
+    }
+    .contact-title {
+      font-family: var(--font-primary);
+      color: var(--color-primary);
+      font-size: var(--font-size-xl);
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      justify-content: flex-start;
+      font-size: 1.1rem;
+      color: var(--color-dark);
+      background: var(--color-light);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow-sm);
+      margin: 0 auto;
+      max-width: 350px;
+    }
+    .contact-icon {
+      color: var(--color-accent);
+      font-size: 1.3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-label {
+      font-weight: 600;
+      color: var(--color-primary);
+      min-width: 70px;
+    }
+    .contact-link {
+      color: var(--color-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      word-break: break-all;
+    }
+    .contact-link:hover {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .contact-card {
+        padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+      }
+      .contact-item {
+        font-size: 1rem;
+        padding: 0.5rem 0.5rem;
+      }
+    }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__brand">
+                <h1 class="nav__logo">Coffee Day.</h1>
+            </div>
+            <ul class="nav__menu">
+                <li><a href="#home" class="nav__link">Home</a></li>
+                <li><a href="#about" class="nav__link">About</a></li>
+                <li><a href="#menu" class="nav__link">Menu</a></li>
+                <li><a href="#values" class="nav__link">Values</a></li>
+
+                <li><a href="#franchise" class="nav__link">Franchise</a></li>
+                <li><a href="#careers" class="nav__link">Careers</a></li>
+                <li><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+            <button class="nav__toggle" id="navToggle">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+
+  <!-- Hero Section: Main banner with title and actions -->
+        <section id="home" class="hero">
+            <div class="hero__content container">
+                <h1 class="hero__title">Chai And Coffee</h1>
+                <p class="hero__subtitle">Where Asian Chai meets European Coffee culture in perfect harmony.</p>
+                <div class="hero__actions">
+                    <a href="#menu" class="btn btn--primary">View Menu</a>
+                    <a href="#contact" class="btn btn--outline">Find Locations</a>
+                </div>
+            </div>
+        </section>
+
+  <!-- About Section: Story, Mission, Vision, Journey, Values -->
+        <section id="about" class="about section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Our Story</h2>
+                    <p class="section__subtitle">Where every cup tells a story</p>
+                </div>
+                <div class="about__content">
+          <div class="about__text">
+            <p>Founded in 2024, Coffee day. brings authentic chai traditions from the heart of India together with expertly crafted coffee. Our journey began with a simple belief: that every cup tells a story.</p>
+            <p>We source our tea leaves directly from family-owned gardens in Darjeeling and our coffee beans from sustainable farms across Colombia and Ethiopia. Every sip supports fair trade practices and environmental sustainability.</p>
+            <h3>Our Mission</h3>
+            <p>At our core, we are passionate about creating a harmonious blend of <b>Asian Chai</b> and <b>European Coffee</b> traditions that celebrates the rich heritage of both cultures. Our mission is to provide an authentic, premium beverage experience that brings people together through the universal language of exceptional tea and coffee. We believe in fostering community connections while honoring traditional brewing methods and introducing innovative flavor profiles that reflect the diverse tastes of our global customers. Through carefully sourced ingredients and expertly crafted beverages, we aim to create moments of comfort, connection, and cultural appreciation in every cup we serve.</p>
+            <div class="values">
+            <h3>Our vision</h3>
+            <p>We envision a world where the ancient art of Asian Chai seamlessly meets the refined tradition of European Coffee, creating a new standard for specialty beverages. Our vision is to establish a network of welcoming spaces that serve as cultural bridges, where the warmth of Asian hospitality meets European sophistication. By 2027, we aspire to be recognized as the premier destination for authentic chai-coffee fusion experiences, known for our commitment to quality, cultural authenticity, and exceptional customer service. We aim to create a brand that not only satisfies taste preferences but also educates and celebrates the beautiful traditions behind each beverage we serve.</p>
+            <div class="about__image" style="display: flex; justify-content: center; margin: 2rem 0;">
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cozy coffee shop interior" style="width: 350px; max-width: 90vw; border-radius: 16px; box-shadow: 0 4px 24px 0 rgba(62,39,35,0.13);" />
+            </div>
+            <h3>Our Journey</h3>
+            <p>Year One Foundation (2025-2026)
+Our journey begins with establishing 50 carefully selected locations across key metropolitan markets. Each store will serve as a cultural embassy, introducing communities to our unique fusion concept while building a loyal customer base. In year 2 scaling up to 200 locations expanding into secondary locations and expanding to 400 locations in 5 years, with plan of international expansion and continued innovations in offerings.</p>
+              <h3 id="values">Our Values</h3>
+              <div class="values__list">
+                <span class="value">Sustainability</span>
+                <span class="value">Quality</span>
+                <span class="value">Community</span>
+                <span class="value">Authenticity</span>
+                <span class="value">Fair Trade</span>
+              </div>
+            </div>
+          </div>
+          <div class="about__image" style="display: flex; justify-content: center; margin-top: 2rem;">
+          <!-- Picture after Our Values removed as requested -->
+                </div>
+            </div>
+        </section>
+
+  <!-- Menu Section: Tabs and menu items -->
+        <section id="menu" class="menu section">
+            <div class="container">
+                <div class="section__header">
+                    <h2 class="section__title">Our Menu</h2>
+                    <p class="section__subtitle">Crafted with love, served with pride</p>
+                </div>
+                <div class="menu__tabs">
+                    <button class="menu__tab active" onclick="showMenu('chai', event)">Chai</button>
+                    <button class="menu__tab" onclick="showMenu('coffee', event)">Coffee</button>
+                    <button class="menu__tab" onclick="showMenu('breakfast', event)">Breakfast</button>
+                </div>
+                
+                <!-- Chai Menu -->
+                <div class="menu__content active" data-content="chai">
+                    <div class="menu__grid">
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Classic Masala Chai</h3>
+                            </div>
+                            <p>Traditional blend of black tea, cardamom, cinnamon, ginger, and cloves</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Saffron Chai Latte</h3>
+                            </div>
+                            <p>Luxurious chai infused with premium saffron and steamed milk</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Vanilla Chai</h3>
+                            </div>
+                            <p>Smooth vanilla notes with our signature spice blend</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Iced Chai Latte</h3>
+                            </div>
+                            <p>Refreshing cold chai with frothed milk and spices</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Rose Chai</h3>
+                            </div>
+                            <p>Delicate rose petals with traditional chai spices</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coffee Menu -->
+                <div class="menu__content" data-content="coffee">
+                    <div class="menu__grid">
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>House Blend Espresso</h3>
+                            </div>
+                            <p>Rich, full-bodied espresso from our signature blend</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Colombian Single Origin</h3>
+                            </div>
+                            <p>Smooth, chocolatey notes from the mountains of Colombia</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Ethiopian Pour Over</h3>
+                            </div>
+                            <p>Bright, floral coffee with hints of citrus</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Flat White</h3>
+                            </div>
+                            <p>Double shot espresso with steamed milk</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Cold Brew</h3>
+                            </div>
+                            <p>Smooth, low-acid coffee steeped for 12 hours</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakfast Menu -->
+                <div class="menu__content" data-content="breakfast">
+                    <div class="menu__grid">
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Avocado Toast</h3>
+                            </div>
+                            <p>Smashed avocado on sourdough with cherry tomatoes and seeds</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Breakfast Croissant</h3>
+                            </div>
+                            <p>Flaky croissant with free-range eggs, bacon, and cheese</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Granola Bowl</h3>
+                            </div>
+                            <p>House-made granola with Greek yogurt and seasonal fruit</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>Smoked Salmon Bagel</h3>
+                            </div>
+                            <p>Everything bagel with cream cheese, smoked salmon, and capers</p>
+                        </div>
+                        <div class="menu__item">
+                            <div class="menu__item-header">
+                                <h3>French Toast</h3>
+                            </div>
+                            <p>Brioche French toast with maple syrup and berries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Contact Information Section as a main section -->
+    <section id="contact" class="contact-info section">
+      <div class="container contact-card">
+        <h2 class="contact-title">Contact Us</h2>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon"><i data-lucide="phone"></i></span>
+            <span class="contact-label">Phone:</span>
+            <a href="tel:+1234567890" class="contact-link">+1 234 567 890</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon"><i data-lucide="mail"></i></span>
+            <span class="contact-label">Email:</span>
+            <a href="mailto:info@coffeeday.com" class="contact-link">info@coffeeday.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon"><i data-lucide="map-pin"></i></span>
+            <span class="contact-label">Address:</span>
+            <span class="contact-link">123 Coffee Street, Brewtown, Country</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+      initNavigation();
+    });
+
+        // Navigation functionality
+        function initNavigation() {
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.querySelector('.nav__menu');
+            const navLinks = document.querySelectorAll('.nav__link');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navMenu.classList.toggle('nav__menu--active');
+                    
+                    const icon = navToggle.querySelector('i');
+                    if (navMenu.classList.contains('nav__menu--active')) {
+                        icon.setAttribute('data-lucide', 'x');
+                    } else {
+                        icon.setAttribute('data-lucide', 'menu');
+                    }
+                    
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('.header').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    if (navMenu && navMenu.classList.contains('nav__menu--active')) {
+                        navMenu.classList.remove('nav__menu--active');
+                        if (navToggle) {
+                            const icon = navToggle.querySelector('i');
+                            icon.setAttribute('data-lucide', 'menu');
+                            if (typeof lucide !== 'undefined') {
+                                lucide.createIcons();
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+    // Menu switching function
+    function showMenu(menuType, event) {
+      // Hide all menu contents
+      const allMenus = document.querySelectorAll('.menu__content');
+      allMenus.forEach(menu => {
+        menu.classList.remove('active');
+      });
+      // Remove active class from all tabs
+      const allTabs = document.querySelectorAll('.menu__tab');
+      allTabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+      // Show selected menu
+      const targetMenu = document.querySelector(`[data-content="${menuType}"]`);
+      if (targetMenu) {
+        targetMenu.classList.add('active');
+      }
+      // Activate clicked tab
+      if (event && event.target) {
+        event.target.classList.add('active');
+      }
+    }
+    </script>
+</body>
+</html>
